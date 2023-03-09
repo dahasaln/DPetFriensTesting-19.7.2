@@ -1,3 +1,5 @@
+#Модуль 19. Задание 19.7.2
+
 import json
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
@@ -6,7 +8,7 @@ class PetFriends:
     def __init__(self):
         self.base_url = "https://petfriends.skillfactory.ru/"
 
-#1.
+#1. Метод GET.
     def get_api_key(self, email, password) :
 
         headers = {
@@ -22,7 +24,7 @@ class PetFriends:
             result = res.text
         return status, result
 
-#2.
+#2. Метод GET.
     def get_list_of_pets(self, auth_key, filter):
 
         headers = {'auth_key': auth_key['key']}
@@ -37,7 +39,7 @@ class PetFriends:
             result = res.text
         return status, result
 
-#3.
+#3. Метод POST
     def add_new_pets(self, auth_key: json, name: str, animal_type: str, age: str, pet_photo: str) -> json:
         data = MultipartEncoder(
             fields={
@@ -61,7 +63,7 @@ class PetFriends:
             result = res.text
         return status, result
 
-#4.
+#4.Метод DELETE.
     def delete_pets(self, auth_key: json, pet_id: str) -> json:
         '''Метод делает delete запрос к API сервера, удоляет питомца по его ID и возвращает
         статус запроса'''
@@ -79,7 +81,8 @@ class PetFriends:
         except:
             result = res.text
         return status, result
-#5.
+
+#5.Метод PUT.
     def update_pet_info(self, auth_key: json, pet_id: str, name: str, animal_type: str, age: str) ->json:
         headers = {
             'auth_key': auth_key['key'],
@@ -100,7 +103,7 @@ class PetFriends:
         except:
             result = res.text
         return status, result
-#6.
+#6.Метод POST.
     def add_new_pet_without_photo(self, auth_key: json, name: str, animal_type: str, age: str) ->json:
         '''Метод делает post запрос к API сервера, добавляет новые данные из data на сайт
         и возвращает код статуса запроса и результат в формате json с информацией о животном.'''
@@ -122,7 +125,7 @@ class PetFriends:
         except:
             result = res.text
         return status, result
-#7.
+#7.Метод POST.
     def add_photo_of_pet(self, auth_key: json, pet_id: str, pet_photo: str) ->json:
         '''Метод делает post запрос к API сервера и добавляет новое фото указанного
         pet_id питомца. Возвращает код статуса запроса и результат в формате json с информацией о животном.'''
